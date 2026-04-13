@@ -1,38 +1,48 @@
 cmake_minimum_required(VERSION 3.19)
-project(LV LANGUAGES CXX)
+set(PROJECT_NAME LV)
+
+project(${PROJECT_NAME} LANGUAGES CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets LinguistTools)
 
-qt_standard_project_setup()
 
-qt_add_executable(LV
-    WIN32 MACOSX_BUNDLE
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-)
 
-qt_add_translations(
-    TARGETS LV
-    TS_FILES LV_zh_CN.ts
-)
 
-target_link_libraries(LV
-    PRIVATE
-        Qt::Core
-        Qt::Widgets
-)
+set(ENABLE_UNIT_TESTS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-install(TARGETS LV
-    BUNDLE  DESTINATION .
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-qt_generate_deploy_app_script(
-    TARGET LV
-    OUTPUT_SCRIPT deploy_script
-    NO_UNSUPPORTED_PLATFORM_ERROR
+include(FetchContent)
+set(FETCHCONTENT_BASE_DIR ${CMAKE_SOURCE_DIR}/third_party)
+
+# 拉取 GoogleTest
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
-install(SCRIPT ${deploy_script})
+# 拉取 Eigen
+FetchContent_Declare(
+  eigen
+  URL https://gitlab.com/libeigen/eigen/-/archive/3.4.1/eigen-3.4.1.zip
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+# 拉取spdlog
+FetchContent_Declare(
+  spdlog
+  URL https://github.com/gabime/spdlog/archive/refs/tags/v1.17.0.zip
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+# 下载并添加到构建
+FetchContent_MakeAvailable(googletest eigen spdlog)
+
+
+add_subdirectory(src)
+
+if(ENABLE_UNIT_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
