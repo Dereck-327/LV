@@ -1,0 +1,78 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: Configure Release",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "-S",
+        "${workspaceFolder}",
+        "-B",
+        "${workspaceFolder}/build",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_PREFIX_PATH=C:/Qt/6.11.0/msvc2022_64",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build Release",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "${workspaceFolder}/build"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": "CMake: Configure Release",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "CMake: Test Release",
+      "type": "process",
+      "command": "ctest",
+      "args": [
+        "--test-dir",
+        "${workspaceFolder}/build",
+        "--output-on-failure",
+        "-C",
+        "Release"
+      ],
+      "dependsOn": "CMake: Build Release",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run: LV",
+      "type": "process",
+      "command": "${workspaceFolder}/build/bin/LV_app.exe",
+      "args": [],
+      "dependsOn": "CMake: Build Release",
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          "PATH": "C:/Qt/6.11.0/msvc2022_64/bin;${env:PATH}"
+        }
+      }
+    },
+    {
+      "label": "CMake: Clean Release",
+      "type": "process",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "${workspaceFolder}/build",
+        "--target",
+        "clean"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

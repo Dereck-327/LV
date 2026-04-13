@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch LV Release",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/bin/LV_app.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/bin",
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "C:/Qt/6.11.0/msvc2022_64/bin;${env:PATH}"
+        }
+      ],
+      "console": "integratedTerminal",
+      "preLaunchTask": "CMake: Build Release",
+      "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
+    }
+  ]
+}
