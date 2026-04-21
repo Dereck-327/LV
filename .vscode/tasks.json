@@ -40,6 +40,15 @@
       "problemMatcher": []
     },
     {
+      "label": "CMake: Configure Release (If Needed)",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/configure_release_if_needed.cmd",
+      "args": [
+        "${workspaceFolder}"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "CMake: Build LV_app",
       "type": "process",
       "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
@@ -48,13 +57,13 @@
         "${workspaceFolder}/build",
         "--target",
         "LV_app",
-        "--verbose"
+        // "--verbose"
       ],
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "dependsOn": "CMake: Configure Release",
+      "dependsOn": "CMake: Configure Release (If Needed)",
       "problemMatcher": [
         "$msCompile"
       ]
@@ -79,7 +88,7 @@
         "LV_tests",
         "--verbose"
       ],
-      "dependsOn": "CMake: Configure Release",
+      "dependsOn": "CMake: Configure Release (If Needed)",
       "problemMatcher": [
         "$msCompile"
       ]
@@ -156,6 +165,139 @@
       "dependsOn": [
         "CMake: Rebuild LV_tests (Clean)",
         "CMake: Test Release"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Clean Debug Build Dir",
+      "type": "process",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "if exist \"${workspaceFolder}\\build_debug\" rmdir /s /q \"${workspaceFolder}\\build_debug\""
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Configure Debug",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
+      "args": [
+        "-S",
+        "${workspaceFolder}",
+        "-B",
+        "${workspaceFolder}/build_debug",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+        "-DCMAKE_MAP_IMPORTED_CONFIG_DEBUG=Release",
+        "-DCMAKE_PREFIX_PATH=C:/Qt/6.11.0/msvc2022_64",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_C_COMPILER_LAUNCHER=",
+        "-DCMAKE_CXX_COMPILER_LAUNCHER="
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Reconfigure Debug (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Clean Debug Build Dir",
+        "CMake: Configure Debug"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Configure Debug (If Needed)",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/configure_debug_if_needed.cmd",
+      "args": [
+        "${workspaceFolder}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build LV_app Debug",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
+      "args": [
+        "--build",
+        "${workspaceFolder}/build_debug",
+        "--target",
+        "LV_app"
+      ],
+      "dependsOn": "CMake: Configure Debug (If Needed)",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "CMake: Rebuild LV_app Debug (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Reconfigure Debug (Clean)",
+        "CMake: Build LV_app Debug"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build LV_tests Debug",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
+      "args": [
+        "--build",
+        "${workspaceFolder}/build_debug",
+        "--target",
+        "LV_tests",
+        "--verbose"
+      ],
+      "dependsOn": "CMake: Configure Debug (If Needed)",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "CMake: Rebuild LV_tests Debug (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Reconfigure Debug (Clean)",
+        "CMake: Build LV_tests Debug"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run: LV Debug",
+      "type": "process",
+      "command": "${workspaceFolder}/build_debug/bin/LV_app.exe",
+      "args": [],
+      "dependsOn": "CMake: Build LV_app Debug",
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          "PATH": "C:/Qt/6.11.0/msvc2022_64/bin;${env:PATH}"
+        }
+      }
+    },
+    {
+      "label": "CMake: Test Debug",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/ctest_with_vsenv.cmd",
+      "args": [
+        "--test-dir",
+        "${workspaceFolder}/build_debug",
+        "--output-on-failure",
+        "-C",
+        "Debug"
+      ],
+      "dependsOn": "CMake: Build LV_tests Debug",
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Test Debug (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Rebuild LV_tests Debug (Clean)",
+        "CMake: Test Debug"
       ],
       "problemMatcher": []
     }
