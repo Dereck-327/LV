@@ -224,7 +224,8 @@
         "--build",
         "${workspaceFolder}/build_debug",
         "--target",
-        "LV_app"
+        "LV_app",
+        "--verbose"
       ],
       "dependsOn": "CMake: Configure Debug (If Needed)",
       "problemMatcher": [

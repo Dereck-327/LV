@@ -4,6 +4,12 @@ set(PROJECT_NAME LV)
 
 project(${PROJECT_NAME} LANGUAGES CXX)
 
+# Keep runtime library consistent with Qt prebuilt binaries on Windows.
+if(MSVC)
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL$<$<CONFIG:Debug>:Debug>" CACHE STRING "" FORCE)
+  set(STATIC_WINDOWS_RUNTIME OFF CACHE BOOL "" FORCE)
+endif()
+
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets LinguistTools)
 
 
