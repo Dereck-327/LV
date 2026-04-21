@@ -21,6 +21,7 @@ target_link_libraries(${PROJECT_NAME}_app
         Qt::Core
         Qt::Widgets
         spdlog::spdlog
+        Open3D::Open3D
 )
 
 

@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch LV Release",
+      "name": "Launch LV Release (Fast)",
       "type": "cppvsdbg",
       "request": "launch",
       "program": "${workspaceFolder}/build/bin/LV_app.exe",
@@ -16,7 +16,61 @@
         }
       ],
       "console": "integratedTerminal",
-      "preLaunchTask": "CMake: Build Release",
+      "preLaunchTask": "CMake: Build LV_app",
+      "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
+    },
+    {
+      "name": "Launch LV Release (Clean Rebuild)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/bin/LV_app.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/bin",
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "C:/Qt/6.11.0/msvc2022_64/bin;${env:PATH}"
+        }
+      ],
+      "console": "integratedTerminal",
+      "preLaunchTask": "CMake: Rebuild LV_app (Clean)",
+      "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
+    },
+    {
+      "name": "Launch LV_tests Release (Fast)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/bin/LV_tests.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/bin",
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "C:/Qt/6.11.0/msvc2022_64/bin;${env:PATH}"
+        }
+      ],
+      "console": "integratedTerminal",
+      "preLaunchTask": "CMake: Build LV_tests",
+      "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
+    },
+    {
+      "name": "Launch LV_tests Release (Clean Rebuild)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/bin/LV_tests.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/build/bin",
+      "environment": [
+        {
+          "name": "PATH",
+          "value": "C:/Qt/6.11.0/msvc2022_64/bin;${env:PATH}"
+        }
+      ],
+      "console": "integratedTerminal",
+      "preLaunchTask": "CMake: Rebuild LV_tests (Clean)",
       "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
     }
   ]

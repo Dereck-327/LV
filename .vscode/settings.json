@@ -15,6 +15,27 @@
     "--output-on-failure"
   ],
   "files.associations": {
-    "*.ui": "xml"
-  }
+    "*.ui": "xml",
+    "*.conf": "bitbake",
+    "*.inc": "bitbake"
+  },
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}/sources/poky/bitbake/lib",
+    "${workspaceFolder}\\sources\\poky\\meta\\lib"
+  ],
+  "python.analysis.extraPaths": [
+    "G:\\PIP_ENV_PROJECT\\ENV\\Lark-NtTz9GWT\\Lib\\site-packages",
+    "${workspaceFolder}/sources/poky/bitbake/lib",
+    "${workspaceFolder}\\sources\\poky\\meta\\lib"
+  ],
+  "terminal.integrated.profiles.windows": {
+    "VS2022 x64": {
+        "path": "cmd.exe",
+        "args": [
+            "/k",
+            "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"
+        ]
+    }
+},
+"terminal.integrated.defaultProfile.windows": "VS2022 x64"
 }

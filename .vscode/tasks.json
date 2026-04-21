@@ -2,9 +2,19 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "CMake: Clean Build Dir",
+      "type": "process",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "if exist \"${workspaceFolder}\\build\" rmdir /s /q \"${workspaceFolder}\\build\""
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "CMake: Configure Release",
       "type": "process",
-      "command": "cmake",
+      "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
       "args": [
         "-S",
         "${workspaceFolder}",
@@ -14,17 +24,31 @@
         "Ninja",
         "-DCMAKE_BUILD_TYPE=Release",
         "-DCMAKE_PREFIX_PATH=C:/Qt/6.11.0/msvc2022_64",
-        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_C_COMPILER_LAUNCHER=",
+        "-DCMAKE_CXX_COMPILER_LAUNCHER="
       ],
       "problemMatcher": []
     },
     {
-      "label": "CMake: Build Release",
+      "label": "CMake: Reconfigure Release (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Clean Build Dir",
+        "CMake: Configure Release"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build LV_app",
       "type": "process",
-      "command": "cmake",
+      "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
       "args": [
         "--build",
-        "${workspaceFolder}/build"
+        "${workspaceFolder}/build",
+        "--target",
+        "LV_app",
+        "--verbose"
       ],
       "group": {
         "kind": "build",
@@ -36,17 +60,55 @@
       ]
     },
     {
-      "label": "CMake: Test Release",
-      "type": "process",
-      "command": "ctest",
-      "args": [
-        "--test-dir",
-        "${workspaceFolder}/build",
-        "--output-on-failure",
-        "-C",
-        "Release"
+      "label": "CMake: Rebuild LV_app (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Reconfigure Release (Clean)",
+        "CMake: Build LV_app"
       ],
-      "dependsOn": "CMake: Build Release",
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build LV_tests",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
+      "args": [
+        "--build",
+        "${workspaceFolder}/build",
+        "--target",
+        "LV_tests",
+        "--verbose"
+      ],
+      "dependsOn": "CMake: Configure Release",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "CMake: Rebuild LV_tests (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Reconfigure Release (Clean)",
+        "CMake: Build LV_tests"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build App+Tests",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Build LV_app",
+        "CMake: Build LV_tests"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Rebuild App+Tests (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Reconfigure Release (Clean)",
+        "CMake: Build App+Tests"
+      ],
       "problemMatcher": []
     },
     {
@@ -54,7 +116,7 @@
       "type": "process",
       "command": "${workspaceFolder}/build/bin/LV_app.exe",
       "args": [],
-      "dependsOn": "CMake: Build Release",
+      "dependsOn": "CMake: Build LV_app",
       "problemMatcher": [],
       "options": {
         "env": {
@@ -65,12 +127,35 @@
     {
       "label": "CMake: Clean Release",
       "type": "process",
-      "command": "cmake",
+      "command": "${workspaceFolder}/.vscode/cmake_with_vsenv.cmd",
       "args": [
         "--build",
         "${workspaceFolder}/build",
         "--target",
         "clean"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Test Release",
+      "type": "process",
+      "command": "${workspaceFolder}/.vscode/ctest_with_vsenv.cmd",
+      "args": [
+        "--test-dir",
+        "${workspaceFolder}/build",
+        "--output-on-failure",
+        "-C",
+        "Release"
+      ],
+      "dependsOn": "CMake: Build LV_tests",
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Test Release (Clean)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CMake: Rebuild LV_tests (Clean)",
+        "CMake: Test Release"
       ],
       "problemMatcher": []
     }
