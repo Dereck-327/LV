@@ -38,10 +38,10 @@
       "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
     },
     {
-      "name": "Launch LV_tests Release (Fast)",
+      "name": "Launch PointCloudWorkflow_tests Release (Fast)",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/bin/LV_tests.exe",
+      "program": "${workspaceFolder}/build/bin/PointCloudWorkflow_tests.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}/build/bin",
@@ -56,10 +56,10 @@
       "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
     },
     {
-      "name": "Launch LV_tests Release (Clean Rebuild)",
+      "name": "Launch PointCloudWorkflow_tests Release (Clean Rebuild)",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/bin/LV_tests.exe",
+      "program": "${workspaceFolder}/build/bin/PointCloudWorkflow_tests.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}/build/bin",
@@ -110,10 +110,10 @@
       "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
     },
     {
-      "name": "Launch LV_tests Debug (Fast)",
+      "name": "Launch PointCloudWorkflow_tests Debug (Fast)",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build_debug/bin/LV_tests.exe",
+      "program": "${workspaceFolder}/build_debug/bin/PointCloudWorkflow_tests.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}/build_debug/bin",
@@ -128,10 +128,10 @@
       "visualizerFile": "c:\\Users\\hejiankang.LIGHTICTECH\\AppData\\Roaming\\Code\\User\\workspaceStorage\\a999ad909993895bc3e88ee2ee570b4b\\tonka3000.qtvsctools\\qt.natvis.xml"
     },
     {
-      "name": "Launch LV_tests Debug (Clean Rebuild)",
+      "name": "Launch PointCloudWorkflow_tests Debug (Clean Rebuild)",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build_debug/bin/LV_tests.exe",
+      "program": "${workspaceFolder}/build_debug/bin/PointCloudWorkflow_tests.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}/build_debug/bin",

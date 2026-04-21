@@ -1,0 +1,18 @@
+set(POINT_CLOUD_WORKFLOW_TEST_SOURCES
+  ${CMAKE_CURRENT_LIST_DIR}/PointCloudWorkflowTest.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/support/PointCloudTestData.cpp
+)
+
+lv_add_test(PointCloudWorkflow_tests
+  SOURCES
+    ${POINT_CLOUD_WORKFLOW_TEST_SOURCES}
+  LIBRARIES
+    QCC_DB_LIB
+    QCC_IO_LIB
+  INCLUDE_DIRS
+    ${CMAKE_CURRENT_LIST_DIR}
+  WORKING_DIRECTORY
+    ${CMAKE_CURRENT_BINARY_DIR}
+  LABELS
+    example;integration
+)

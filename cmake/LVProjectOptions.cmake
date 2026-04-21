@@ -6,6 +6,7 @@ function(lv_setup_project_options)
 
   option(LV_BUILD_PLUGINS "Build the plugin system and demo plugins" ON)
   option(LV_BUILD_SHARED_CORE_LIBS "Build core LV libraries as shared libraries" OFF)
+  option(LV_ENABLE_UNIT_TESTS "Build GoogleTest-based unit tests" ON)
 
   set(CMAKE_AUTOMOC ON PARENT_SCOPE)
   set(CMAKE_AUTOUIC ON PARENT_SCOPE)

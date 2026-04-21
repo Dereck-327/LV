@@ -2,6 +2,7 @@ add_executable(LV_app)
 
 add_subdirectory(include)
 add_subdirectory(src)
+add_subdirectory(ui)
 
 target_link_libraries(LV_app
   PRIVATE
@@ -10,6 +11,7 @@ target_link_libraries(LV_app
     QCC_DB_LIB
     QCC_IO_LIB
     QCC_GL_LIB
+    spdlog::spdlog
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets

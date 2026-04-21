@@ -32,7 +32,7 @@ if(LV_BUILD_PLUGINS)
   endif()
 endif()
 
-if(BUILD_TESTING)
+if(LV_ENABLE_UNIT_TESTS)
   enable_testing()
   add_subdirectory(tests)
 endif()
